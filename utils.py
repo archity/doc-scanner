@@ -34,7 +34,7 @@ def image_grid(image_names, IMAGE_SIZE_C, IMAGE_SIZE_R):
             from_image = image_names[y * COLUMNS + x]
             to_image.paste(Image.fromarray(from_image), (x * IMAGE_SIZE_C, y * IMAGE_SIZE_R))
 
-    to_image.save("./img/final.png")
+    to_image.save("./img/pipeline.png")
     return to_image
 
 
@@ -62,11 +62,12 @@ def draw_text(img, text,
 
     :return: The modified image
     """
-    padding = 10
+    padding = 20
     x, y = pos
     text_size, _ = cv2.getTextSize(text, font, font_scale, font_thickness)
     text_w, text_h = text_size
     cv2.rectangle(img, pos, (x + text_w + padding, y + text_h + padding), text_color_bg, -1)
+    cv2.rectangle(img, pos, (x + text_w + padding, y + text_h + padding), (0, 0, 0), 4)
     cv2.putText(img, text, (x, y + text_h + font_scale - 1), font, font_scale, text_color, font_thickness)
 
     return img
