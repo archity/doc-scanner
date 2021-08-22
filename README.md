@@ -3,8 +3,8 @@
 ## Features
 
 - [X] Image scanner  
-- [ ] OCR based text reader
-- [ ] Document summarizer
+- [X] OCR based text reader
+- [X] Document summarizer
 
 <br>
 
@@ -142,6 +142,23 @@ The [docscanner.py](./docscanner.py) script consists of the following pipeline s
 
 <br>
 
-## 2. OCR based text reader
+## 2. OCR based Image to Text
 
-TODO
+We make use of [*Pytesseract*](https://github.com/madmaze/pytesseract) library to perform the OCR task.
+
+Output in [ocr.txt](./ocr.txt):
+```
+You mentioned that the king was at Lord Arryn’s bedside when he died. I wonder, was the queen with him?”  “Why, no,” Pycelle said. “She and the children were making the journey to Casterly Rock, in company with her father. Lord Tywin had brought a retinue to the city for the tourney on Prince > Joffrey’s name day, no doubt hoping to see his son Jaime win the champion’s crown. In that he was sadly disappointed. It fell to me to send the queen word of Lord Arryn’s sudden death. Never have I sent off a bird with a heavier heart.”  “Dark wings, dark words,” Ned murmured. It was a proverb Old Nan had taught him as a boy.  "Page 275 31%       
+```
+
+## 3. Text Summarizer and Keyword Extractor
+
+Output in [summary.txt](./summary.txt):
+
+```
+Summary: 
+ [You mentioned that the king was at Lord Arryn’s bedside when he died., “She and the children were making the journey to Casterly Rock, in company with her father., Lord Tywin had brought a retinue to the city for the tourney on Prince > Joffrey’s name day, no doubt hoping to see his son Jaime win the champion’s crown.,  “Dark wings, dark words,” Ned murmured.]
+
+Keywords: 
+ ['Lord Arryn', 'Ned murmured', 'Jaime', 'Casterly Rock', 'dark words', 'Lord Tywin', 'Joffrey', 'company', 'Prince', 'Arryn', 'Old Nan', 'Ned', 'the champion’s crown', 'Tywin', 'a heavier heart', 'her father', 'the queen word', 'Pycelle', 'his son', 'a boy', '“Dark wings', 'the tourney', 'the city', '’s bedside', 'a retinue', '31%', 'the queen', 'the journey', 'the king', 'a bird', '"Page', 'a proverb', 'the children']
+```

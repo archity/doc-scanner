@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .error {
+        color: red;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-lite@4.8.1"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm//vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"name": "data-ec39e32c9a90abe461f128f29cfeaeb0"}, "mark": "bar", "encoding": {"color": {"type": "quantitative", "field": "count"}, "tooltip": [{"type": "nominal", "field": "text"}, {"type": "quantitative", "field": "rank"}, {"type": "quantitative", "field": "count"}], "x": {"type": "quantitative", "field": "index"}, "y": {"type": "quantitative", "field": "rank"}}, "title": "Keyphrase profile of the document", "$schema": "https://vega.github.io/schema/vega-lite/v4.8.1.json", "datasets": {"data-ec39e32c9a90abe461f128f29cfeaeb0": [{"index": 0, "text": "Lord Arryn", "count": 2, "rank": 0.09596960025770901}, {"index": 1, "text": "Ned murmured", "count": 1, "rank": 0.0933721339344067}, {"index": 2, "text": "Jaime", "count": 1, "rank": 0.09118371945297886}, {"index": 3, "text": "Casterly Rock", "count": 2, "rank": 0.08549707836156092}, {"index": 4, "text": "dark words", "count": 1, "rank": 0.08259439971260675}, {"index": 5, "text": "Lord Tywin", "count": 1, "rank": 0.0797526328345664}, {"index": 6, "text": "Joffrey", "count": 1, "rank": 0.07741310171610108}, {"index": 7, "text": "company", "count": 1, "rank": 0.07488656632128335}, {"index": 8, "text": "Prince", "count": 1, "rank": 0.07413259316790406}, {"index": 9, "text": "Arryn", "count": 2, "rank": 0.07400969600201}, {"index": 10, "text": "Old Nan", "count": 2, "rank": 0.06866718919142648}, {"index": 11, "text": "Ned", "count": 1, "rank": 0.06050945165113263}, {"index": 12, "text": "the champion\u2019s crown", "count": 1, "rank": 0.059059123456075335}, {"index": 13, "text": "Tywin", "count": 1, "rank": 0.047660708728817947}, {"index": 14, "text": "a heavier heart", "count": 1, "rank": 0.046606312855501826}, {"index": 15, "text": "her father", "count": 1, "rank": 0.04509006736746108}, {"index": 16, "text": "the queen word", "count": 1, "rank": 0.04326503367043116}, {"index": 17, "text": "Pycelle", "count": 2, "rank": 0.042547235318457416}, {"index": 18, "text": "his son", "count": 1, "rank": 0.04131545191403336}, {"index": 19, "text": "a boy", "count": 1, "rank": 0.03958962402970598}, {"index": 20, "text": "\u201cDark wings", "count": 1, "rank": 0.035538434978686036}, {"index": 21, "text": "the tourney", "count": 1, "rank": 0.032416948515694315}, {"index": 22, "text": "the city", "count": 1, "rank": 0.03042754725528087}, {"index": 23, "text": "\u2019s bedside", "count": 1, "rank": 0.029552255021453686}, {"index": 24, "text": "a retinue", "count": 1, "rank": 0.028250777805902006}, {"index": 25, "text": "31%", "count": 2, "rank": 0.02672921045738862}, {"index": 26, "text": "the queen", "count": 1, "rank": 0.02672921045738862}, {"index": 27, "text": "the journey", "count": 1, "rank": 0.025219703207249634}, {"index": 28, "text": "the king", "count": 1, "rank": 0.02226231028636786}, {"index": 29, "text": "a bird", "count": 1, "rank": 0.021363563101217748}, {"index": 30, "text": "\"Page", "count": 1, "rank": 0.019651726211508593}, {"index": 31, "text": "a proverb", "count": 1, "rank": 0.019651726211508593}, {"index": 32, "text": "the children", "count": 1, "rank": 0.019651726211508593}, {"index": 33, "text": "I", "count": 2, "rank": 0.0}, {"index": 34, "text": "It", "count": 2, "rank": 0.0}, {"index": 35, "text": "She", "count": 1, "rank": 0.0}, {"index": 36, "text": "You", "count": 1, "rank": 0.0}, {"index": 37, "text": "he", "count": 2, "rank": 0.0}, {"index": 38, "text": "him", "count": 2, "rank": 0.0}, {"index": 39, "text": "me", "count": 1, "rank": 0.0}]}};
+      var embedOpt = {"renderer": "svg", "mode": "vega-lite"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div class="error" style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
