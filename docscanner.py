@@ -22,7 +22,7 @@ def doc_scan_pipeline(input=PATH, output="./img/scanned_doc.jpg"):
     img_blur = cv2.GaussianBlur(img_gray, (5, 5), 1)
 
     # 3. Add Canny edge detection
-    img_threshold = cv2.Canny(img_blur, 100, 200)
+    img_threshold = cv2.Canny(img_blur, 100, 200, L2gradient=True)
 
     # 3.1 Apply dilation
     kernel = np.ones((3, 3))
@@ -54,8 +54,7 @@ def doc_scan_pipeline(input=PATH, output="./img/scanned_doc.jpg"):
 
     # 7. Adaptive thresholding
     img_warp_gray = cv2.cvtColor(img_warp_coloured, cv2.COLOR_BGR2GRAY)
-    img_adaptive_th = cv2.adaptiveThreshold(img_warp_gray, 255, 1, 1, 7, 2)
-    img_adaptive_th = cv2.bitwise_not(img_adaptive_th)
+    img_adaptive_th = cv2.adaptiveThreshold(img_warp_gray, 255, 1, cv2.THRESH_BINARY, 5, 2)
 
     # 7.1 Apply median blurring to remove tiny speckles of noise
     img_adaptive_th = cv2.medianBlur(img_adaptive_th, 3)
