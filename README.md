@@ -6,8 +6,6 @@
 - [X] OCR based text reader
 - [X] Document summarizer
 
-<br>
-
 ---
 
 <br>
@@ -17,6 +15,8 @@
 <p align="left">
 <img width="500" src="./img/pipeline_kindle_compressed.jpg">
 </p>
+
+([High-res image](./img/pipeline_kindle.png))
 
 The [docscanner.py](./docscanner.py) script consists of the following pipeline steps:
 
@@ -62,9 +62,10 @@ The [docscanner.py](./docscanner.py) script consists of the following pipeline s
     * Gaussian filter is used to remove noise from the image
     * The resultant smoothened image is passed through Scharr filters to obtain
     directional derivatives.
-
-        * $Edge\_Gradient \; (G) = \sqrt{G_x^2 + G_y^2}$
-        * $Angle \; (\theta) = \tan^{-1} \bigg(\frac{G_y}{G_x}\bigg)$
+            
+        <p align="left">
+        <img width="300" src="./img/documentation/math_formulaes_canny.png">
+        </p>
 
     * Fine thin edges are removed by the usage of Non-Maximum Suppression (NMS)
     * Finally, Hysteresis Thresholding is done.
@@ -152,6 +153,42 @@ You mentioned that the king was at Lord Arryn’s bedside when he died. I wonder
 ```
 
 ## 3. Text Summarizer and Keyword Extractor
+
+The library [*PyTextRank*](https://github.com/DerwenAI/pytextrank) was utilized, available through a component in [*spaCy*](https://spacy.io/universe/project/spacy-pytextrank)'s pipeline.
+
+### 3.1 How it works
+
+A brief theoretical steps on the working of PyTextRank library:
+
+#### 3.1.1 TextRank
+
+More detailed information on [derwen docs](https://derwen.ai/docs/ptr/explain_algo/).
+
+* A Lemma graph is constructed. For each sentence and for each word:
+    * A `node_id` is created based on `(token.lemma_, token.pos_)`
+    * The `node_id` is added as a node to the lemma graph `lemma_graph.add_node(node_id)`.
+    * Increment/add weight to an edge between current and previous node(s), if their distance is less than certain limit.
+
+* *PageRank* is used to calculate the ranks for each nodes in the lemma graph, based on eigenvector centrality.
+
+#### 3.1.2 Summarization
+
+More detailed information on [derwen docs](https://derwen.ai/docs/ptr/explain_summ/).
+
+* Construct a list of the sentence boundaries with a phrase vector (initialized to empty set) for each sentence:
+    ```py
+    sent_bounds = [ [s.start, s.end, set([])] for s in doc.sents ]
+    ```
+    * The `set()` is updated as a vector with phrase ID for each phrase for every sentence.
+* We get the rank of each phrase and store it as `unit_vector`. Only top `limit_phrases` number of phrases are accessed in this case.
+* Iterate through each sentence and calculate its Euclidean distance from the unit vector
+* Extract the sentences with the lowest distance, up to the limit requested
+
+PyTextRank allows rendering an interactive [html based bar-graph visualization](./img/altair_chart.html) for the most important phrases is available, a static snapshot of which is shown below.
+
+<p align="left">
+<img width="300" src="./img/keyphrase_visualization.png">
+</p>
 
 Output in [summary.txt](./summary.txt):
 
